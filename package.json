@@ -1,0 +1,37 @@
+{
+	"name": "metascraper-og-image",
+	"description": "Get better OG image data from HTML markup",
+	"homepage": "https://nicedoc.io/microlinkhq/metascraper/packages/metascraper-image",
+	"version": "5.13.1",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/microlinkhq/metascraper/tree/master/packages/metascraper-image"
+	},
+	"bugs": {
+		"url": "https://github.com/microlinkhq/metascraper/issues"
+	},
+	"keywords": [
+		"image",
+		"metascraper"
+	],
+	"dependencies": {
+		"url-parse": "^1.4.7",
+		"p-iteration": "^1.1.8",
+		"probe-image-size": "^5.0.0"
+	},
+	"devDependencies": {
+		"standard": "latest"
+	},
+	"engines": {
+		"node": ">= 10"
+	},
+	"files": [
+		"index.js"
+	],
+	"scripts": {
+		"test": "exit 0"
+	},
+	"license": "MIT",
+	"gitHead": "8216cf352ca3e47d0d0244ea8db41a018485acda"
+}
