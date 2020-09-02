@@ -3,6 +3,9 @@
 const { mapSeries } = require('p-iteration');
 const probe = require('probe-image-size');
 const Url = require('url-parse');
+const { $jsonld, $filter, image, toRule } = require('@metascraper/helpers');
+const toImage = toRule(image);
+const getSrc = (el) => el.attr('src');
 
 const cleanOpenGraphImages = async ($, url) => {
 	const { hostname } = new Url(url);
@@ -51,18 +54,13 @@ const cleanOpenGraphImages = async ($, url) => {
 			resolvedImage = await probe(imageUrl, { timeout: probeTimeout })
 				.then((image) => {
 					const imageType = image.type.toString();
-					if (
-						acceptableExts.includes(imageType) &&
-						(image.width > minDimensions.width || image.height > minDimensions.height)
-					)
-						hasResolved = true;
+					if (acceptableExts.includes(imageType) && (image.width > minDimensions.width || image.height > minDimensions.height)) hasResolved = true;
 					return image.url;
 				})
 				.catch((err) => {
 					console.debug('Unable to probe image', imageUrl);
 				});
 		});
-
 		return resolvedImage;
 	} catch (err) {
 		return null;
@@ -75,6 +73,15 @@ module.exports = () => {
 			async ({ htmlDom: $, url }) => {
 				return await cleanOpenGraphImages($, url);
 			},
+			toImage(($) => $('meta[itemprop="image"]').attr('content')),
+			toImage($jsonld('image.0.url')),
+			toImage($jsonld('image.url')),
+			toImage($jsonld('image.url')),
+			toImage($jsonld('image')),
+			toImage(($) => $filter($, $('article img[src]'), getSrc)),
+			toImage(($) => $filter($, $('#content img[src]'), getSrc)),
+			toImage(($) => $('img[alt*="author" i]').attr('src')),
+			toImage(($) => $('img[src]:not([aria-hidden="true"])').attr('src')),
 		],
 	};
 	return rules;
