@@ -16,9 +16,9 @@
 		"metascraper"
 	],
 	"dependencies": {
-		"url-parse": "^1.4.7",
 		"p-iteration": "^1.1.8",
-		"probe-image-size": "^5.0.0"
+		"probe-image-size": "^5.0.0",
+		"url-parse": "^1.4.7"
 	},
 	"devDependencies": {
 		"standard": "latest"
