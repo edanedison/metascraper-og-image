@@ -8,8 +8,8 @@ const Url = require('url-parse');
 const cleanOpenGraphImages = async ($, url) => {
 	const { hostname } = new Url(url);
 	const imageList = [];
-	const probeTimeout = 2500;
-	const minDimensions = { width: 275, height: 275 };
+	const probeTimeout = 2000;
+	const minDimensions = { width: 250, height: 250 };
 	const acceptableExts = ['jpg', 'png', 'jpeg', 'gif'];
 	let resolvedImage = null,
 		hasResolved = false;
