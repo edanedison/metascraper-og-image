@@ -52,7 +52,7 @@ const cleanOpenGraphImages = async ($, url) => {
 			resolvedImage = await probe(imageUrl, { timeout: probeTimeout })
 				.then((image) => {
 					const imageType = image.type.toString();
-					if (acceptableExts.includes(imageType) && image.width > minDimensions.width) {
+					if (acceptableExts.includes(imageType) && image.width >= minDimensions.width) {
 						hasResolved = true;
 						return image;
 					}
